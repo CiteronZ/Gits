@@ -1,7 +1,7 @@
 import time
 class elev:
 
-    def __init__(self, target, floors, currentf):
+    def __init__(self, floors, currentf):
         self.floors = floors
         self.currentf = currentf
 
@@ -14,16 +14,13 @@ class elev:
             elev.start(self)
 
         while self.currentf != move:
-
-            if self.currentf < move:
-                self.currentf += 1
+            for x in self.floors[self.currentf:]:
                 time.sleep(1.5)
-                print("Level:",self.currentf)
+                print("Level:",x)
 
-            elif self.currentf > move:
-                self.currentf -= 1
-                time.sleep(1.5)
-                print("Level:",self.currentf)
+                if x == move:
+                    self.currentf = move
+                    break
 
         print(f"You have arrived at Level:{move}")
 
@@ -54,5 +51,5 @@ floors = [
     15
 ]
 
-newelev = elev(None,floors,1)
+newelev = elev(floors,0)
 newelev.start()
