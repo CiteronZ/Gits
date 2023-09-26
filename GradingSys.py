@@ -53,9 +53,6 @@ class Grading:
             case _: print("Invalid Input (Y/N)"), Grading.askAgain(self)
 
     def printGrade(self):
-        # FinalQ = self.GridTwo[]
-        print(self.GridThree)
-
         print("{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}".format('Name','\t','Q1','\t','Q2','\t','Q3','\t','CP','\t','Final Exam','\t','Grade','\t','Status'))
 
         for x in self.GridThree:
@@ -63,8 +60,13 @@ class Grading:
             newFe = x[5] * 0.40
             newCp = x[4] * 0.20
             
-
-            print("{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}".format(x[0],'\t',x[1],'\t',x[2],'\t',x[3],'\t',x[4],'\t',x[5],'\t','Grade','\t','Status'))
+            final = newq+newFe+newCp
+            
+            if final < 75:
+                self.Remark = "Failed"
+            else:
+                self.Remark = "Passed"
+            print("{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}".format(x[0],'\t',x[1],'\t',x[2],'\t',x[3],'\t',x[4],'\t',x[5],'\t',final,'\t',self.Remark))
 
 
 
