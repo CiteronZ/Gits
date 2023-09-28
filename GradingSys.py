@@ -1,8 +1,6 @@
-#FinalGrades = [#pass,fail]
-
 class Grading:
 
-    def __init__(self, Name, Q1, Q2, Q3, Fe, CPa, Remark, GridOne, GridTwo, GridThree):
+    def __init__(self, Name, Q1, Q2, Q3, Fe, CPa, Remark, GridOne, GridTwo, GridThree, Row):
         self.Name = Name
         self.Q1 = Q1
         self.Q2 = Q2
@@ -14,9 +12,10 @@ class Grading:
         self.GridTwo = GridTwo
         self.GridThree = GridThree
 
+        self.GridThree.append(Row)
 
     def askGrade(self):
-        #Intialize input
+        # Intialize input
 
         self.Name = input("Please Enter your name\n")
         self.GridOne.append(self.Name)
@@ -36,44 +35,52 @@ class Grading:
         self.CPa = int(input("Enter your Class Participation score.\n"))
         self.GridOne.append(self.CPa)
 
+
+        newq = self.GridOne[1] + self.GridOne[2] + self.GridOne[3] / 3
+        newFe = self.GridOne[5] * 0.40
+        newCp = self.GridOne[4] * 0.5
+
+        final = newq + newFe + newCp
+        Roundoff = "{:.2f}".format(final)
+        self.GridOne.append(Roundoff)
+
+        if final < 75:
+            self.Remark = "Failed"
+        else:
+            self.Remark = "Passed"
+        self.GridOne.append(self.Remark)
+
+
         self.GridTwo = self.GridOne.copy()
 
         self.GridThree.append(self.GridTwo)
 
+
         Grading.askAgain(self)
 
 
+
     def askAgain(self):
-        #ask Again
+        # ask Again
         usercho = input("Would you like to input grade again? y/n").lower()
 
         match usercho:
-            case 'y' : self.GridOne.clear(), Grading.askGrade(self)
-            case 'n' : Grading.printGrade(self)
-            case _: print("Invalid Input (Y/N)"), Grading.askAgain(self)
+            case 'y':
+                self.GridOne.clear(), Grading.askGrade(self)
+            case 'n':
+                Grading.printGrade(self)
+            case _:
+                print("Invalid Input (Y/N)"), Grading.askAgain(self)
 
     def printGrade(self):
-        print("{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}".format('Name','\t','Q1','\t','Q2','\t','Q3','\t','CP','\t','Final Exam','\t','Grade','\t','Status'))
 
-        for x in self.GridThree:
-            newq = (x[1]+x[2]+x[3])/3
-            newFe = x[5] * 0.40
-            newCp = x[4] * 0.20
-            
-            final = newq+newFe+newCp
-            
-            if final < 75:
-                self.Remark = "Failed"
-            else:
-                self.Remark = "Passed"
-            print("{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}".format(x[0],'\t',x[1],'\t',x[2],'\t',x[3],'\t',x[4],'\t',x[5],'\t',final,'\t',self.Remark))
-
-
-
+        for row in self.GridThree:
+            print("{: >15} {: >15} {: >15} {: >15} {: >15} {: >15} {: >15} {: >15}".format(*row))
 
 
 GridOne = []
 GridTwo = []
 GridThree = []
-Gradings = Grading(None, None, None, None, None, None, None, GridOne, GridTwo, GridThree)
+Row = ["Name","Q1","Q2","Q3","CP","Final Exam","Grade","Status"]
+Gradings = Grading(None, None, None, None, None, None, None, GridOne, GridTwo, GridThree, Row)
 Gradings.askGrade()
