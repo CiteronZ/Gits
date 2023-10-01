@@ -4,8 +4,7 @@ class bonus_Calc:
         self.Salary = Salary #O(1)
         self.Year = Year #O(1)
         self.Final = None #O(1)
-        self.O = 0 #O(1)
-
+   
 
     def in_Emp(self):
         self.Salary = float(input("Input your monthly salary:\n")) #O(1)
@@ -30,11 +29,10 @@ class bonus_Calc:
         elif self.Year < 5:
             print("Not qualified for Bonus") #O(1)
 
-        self.O = 4
 
         return print(f"The Longevity of the bonus: {x}, the final salary being: {self.Final}") #O(1)
 
-    #def findO(self):
+        #the time complexity of the program is O(1), Constant time.
 
 
 
