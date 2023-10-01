@@ -13,6 +13,8 @@ class bonus_Calc:
 
     def calc(self):
 
+        #Since pretty much all of the code is arithmetic and intializing, most of it is running in constant time.
+        
         if self.Year == 5:
             x = self.Salary * (5/100) #O(1)
             self.Final = x + self.Salary #O(1)
