@@ -14,11 +14,20 @@ class elev:
             elev.start(self)
 
         while self.currentf != move:
-            for x in self.floors[self.currentf:]:
-                time.sleep(1.5)
-                print("Level:",x)
+            if move > self.currentf:
+                for x in self.floors[self.currentf:]:
+                    time.sleep(1.5)
+                    print("Level:",x)
 
-                if x == move:
+                    if x == move:
+                        self.currentf = move
+                        break
+            elif move < self.currentf:
+                self.currentf -= 1
+                time.sleep(1.5)
+                print("Level:", self.currentf)
+
+                if self.currentf == move:
                     self.currentf = move
                     break
 
