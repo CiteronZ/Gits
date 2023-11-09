@@ -76,9 +76,6 @@ class task_Manager:
 
 class task_UI(task_Manager):
 
-    def __init__(self,MaxSize):
-        super().__init__(MaxSize)
-
     def start(self):
         inp = int(input("\nHello! Welcome to your Task Manager.\n1.Add Task\n2.Mark/Complete Tasks\n3.Display "
                         "Tasks\n4.Remove Task\n5.Exit\n"))
