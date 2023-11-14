@@ -1,0 +1,115 @@
+'''
+class Node:
+    def __init__(self, x):
+        self.data = x
+        self.next = None
+
+
+class Stack:
+    def __init__(self):
+        self.top = None
+
+    def is_Empty(self):
+        return self.top == None
+
+    def push(self, x):
+        if Stack.is_Empty(self):
+            new = Node(x)
+            self.top = new
+            self.top.next = None
+
+        elif self.top.next == None:
+            new = Node(x)
+            self.top = new
+            self.top.next = None
+
+    def display(self):
+        temp = self.top.data
+        while self.top:
+            print(temp)
+            temp = self.top.next
+
+new = Stack()
+new.push("Hotdog")
+new.push("Hotdog2")
+new.push("Hotdog3")
+
+new.display()
+'''
+
+class Node:
+    def __init__(self, x):
+        self.data = x
+        self.next = None
+
+class Stack:
+    def __init__(self):
+        self.top = None
+
+    def push(self, x):
+        new = Node(x)
+
+        if self.top is None:
+            self.top = new
+            self.top.next = None
+
+        else:
+            new.next = self.top
+            self.top = new
+
+    def pop(self):
+        if self.top is None:
+            print("Stack Empty!!!")
+        elif self.top.next is None:
+            print(f"Element Popped: {self.top.data}")
+            self.top = None
+        else:
+            temp = self.top
+            print(f"Element Popped: {self.top.data}")
+            self.top = temp.next
+            temp = None
+
+    def display(self):
+        if self.top is None:
+            print("Stack Empty!!!")
+
+        else:
+            print("Elements of stack are:\n")
+            temp = self.top
+            while temp:
+                print(temp.data)
+                temp = temp.next
+            print(f"Top of the stack: {self.top.data}")
+
+s = Stack()
+
+sentence = "A man, a plan, a canal, Panama!"
+for x in sentence:
+    if x == " " or x == "," or x == "!":
+        x=""
+
+    s.push(x)
+
+
+s.display()
+
+'''
+Objectives:
+- Implement modifications to the existing palindrome checker to handle palindromes in sentences, considering spaces, punctuation, and capitalization.
+
+The challenge of extending the palindrome checker to handle sentences involves addressing additional complexities introduced by spaces, punctuation, and capitalization within the input text. Unlike single-word palindromes, sentences may contain various characters that need special consideration.
+
+Let's break down the key challenges:
+
+Spaces: Sentences may contain spaces between words. In a sentence palindrome, spaces should be ignored when determining whether the sentence reads the same forward and backward.
+
+Punctuation: Sentences often include punctuation marks (e.g., commas, periods, exclamation points). For a sentence to be recognized as a palindrome, these punctuation marks need to be treated appropriately. In the example "A man, a plan, a canal, Panama!", the commas are part of the palindrome and should not be ignored.
+
+Capitalization: The palindrome checker should be case-insensitive. Uppercase and lowercase letters should be considered equivalent. In the example "A man, a plan, a canal, Panama!", the capitalization is mixed, and the palindrome checker should correctly handle this variation.
+
+Example: "A man, a plan, a canal, Panama!"
+
+Original Sentence: "A man, a plan, a canal, Panama!"
+Cleaned Sentence (for comparison): "amanaplanacanalpanama"
+Expected Result: The sentence is a palindrome because it reads the same forward and backward, ignoring spaces, punctuation, and capitalization.
+'''
